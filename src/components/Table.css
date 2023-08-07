@@ -15,8 +15,6 @@ table {
         segoe ui symbol,
         noto color emoji;
     font-size: small;
-    overflow: hidden;
-    box-shadow: 10px 0px 36px 0px rgba(0, 0, 0, 0.28);
 }
 
 thead {
@@ -27,6 +25,7 @@ thead {
 th {
     padding: 16px;
     border-bottom: 1px solid #f0f0f0;
+    /* box-shadow: 2px 0 3px -4px; */
 }
 
 td {
@@ -38,7 +37,51 @@ tr:hover {
     background-color: #fafafa;
 }
 
-.table-content {
-    display: flex;
-    justify-content: center;
+/* thead tr {
+    position: sticky;
+    top: 0;
+    background-color: #fafafa;
+    z-index: 1;
+} */
+
+/* thead tr th:first-child {
+    background-color: #fafafa;
+    position: sticky;
+    left: 0;
+}
+
+tbody tr td:nth-child(1) {
+    background-color: white;
+    position: sticky;
+    left: 0;
+} */
+
+
+tbody tr td:hover {
+    background-color: #fafafa;
+}
+
+
+@media screen and (max-width : 1024px) {
+    .table-content {
+        max-width: 45rem;
+        max-height: 40rem;
+        overflow: auto;
+    }
+}
+
+@media screen and (max-width : 768px) {
+    .table-content {
+        max-width: 36rem;
+        max-height: 40rem;
+        overflow: auto;
+    }
+}
+
+@media screen and (max-width : 640px) {
+    .table-content {
+        width: 18rem;
+        max-height: 34rem;
+        overflow: auto;
+    }
 }

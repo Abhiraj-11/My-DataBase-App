@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, ButtonGroup } from "@mui/material";
+import { Box, Button, ButtonGroup } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import "./Forms.css";
 
@@ -26,7 +26,14 @@ const Forms = ({
   };
   return (
     <>
-      <div style={{ width: "500px" }}>
+      <Box
+        sx={{
+          width: {
+            xs: 345,
+            sm: 500,
+          },
+        }}
+      >
         <h1
           className="py-3 m-0 rounded-top"
           style={{
@@ -142,7 +149,7 @@ const Forms = ({
             {buttonType2}
           </Button>
         </ButtonGroup>
-      </div>
+      </Box>
     </>
   );
 };

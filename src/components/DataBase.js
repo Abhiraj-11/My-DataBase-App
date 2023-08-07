@@ -61,11 +61,13 @@ const DataBase = () => {
       title: "Sl No.",
       dataIndex: "id",
       key: "1",
+      fixed: "left",
     },
     {
       title: "First Name",
       dataIndex: "firstName",
       key: "2",
+      // fixed: "left",
     },
     {
       title: "Last Name",
@@ -76,26 +78,34 @@ const DataBase = () => {
       title: "Age",
       dataIndex: "age",
       key: "4",
+      sorter: (a, b) => a.age - b.age,
     },
     {
       title: "Email",
       dataIndex: "email",
       key: "5",
     },
-    // {
-    //   title: "Password",
-    //   dataIndex: "password",
-    //   key: "6",
-    // },
+    {
+      title: "User Name",
+      dataIndex: "userName",
+      key: "6",
+    },
+    {
+      title: "Password",
+      dataIndex: "password",
+      key: "7",
+    },
     {
       title: "Action",
       dataIndex: "action",
-      key: "6",
-      button: (id) => {
+      key: "8",
+      fixed: "right",
+      render: (id) => {
         return (
           <ButtonGroup>
             {/* <Link to={`/update/${id}`}> */}
             <Button
+              sx={{ zIndex: 0 }}
               startIcon=<UpgradeIcon />
               variant="contained"
               color="success"
@@ -124,9 +134,13 @@ const DataBase = () => {
 
   return (
     <>
-      <h1>DATA BASE</h1>
-      <div className="m-4">
-        <Table dataSource={users} columns={columns} />
+      <h1 className="mt-4">DATA BASE</h1>
+      <div className="m-4 ">
+        <Table
+          dataSource={users}
+          columns={columns}
+          scroll={{ x: true, y: true }}
+        />
         <Link to="/">
           <Button
             className="m-4"
