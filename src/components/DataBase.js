@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { /*useContext,*/ useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button, ButtonGroup } from "@mui/material";
-import HomeIcon from "@mui/icons-material/Home";
+import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import UpgradeIcon from "@mui/icons-material/Upgrade";
 // import { UpdateContext } from "../App";
@@ -157,22 +157,17 @@ const DataBase = () => {
   return (
     <>
       <h1 className="mt-4">DATA BASE</h1>
+      <Link to="/add">
+        <Button variant="contained" color="info" startIcon=<AddIcon />>
+          Add
+        </Button>
+      </Link>
       <div className="m-4 ">
         <Table
           dataSource={users}
           columns={columns}
           scroll={{ x: true, y: true }}
         />
-        <Link to="/">
-          <Button
-            className="m-4"
-            variant="contained"
-            color="info"
-            startIcon=<HomeIcon />
-          >
-            Home
-          </Button>
-        </Link>
       </div>
       <section className="mt-5">
         {isLoading && <img src={loading} style={{ width: "300px" }} alt="" />}

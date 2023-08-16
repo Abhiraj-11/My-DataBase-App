@@ -51,7 +51,7 @@ const Update = () => {
           ...user,
         })
         .then(() => {
-          navigate("/data");
+          navigate("/");
         });
     }
   };
@@ -59,7 +59,7 @@ const Update = () => {
   const navigate = useNavigate();
 
   const handleBack = () => {
-    navigate("/data");
+    navigate("/");
   };
   return (
     <div

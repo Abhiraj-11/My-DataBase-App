@@ -6,11 +6,11 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import DatasetIcon from "@mui/icons-material/Dataset";
 import Forms from "./Forms";
-import "./Home.css";
+import "./Add.css";
 
 const url = "https://64bf9dde0d8e251fd1112096.mockapi.io/crud-operation";
 
-const Home = () => {
+const Add = () => {
   const [user, setUser] = useState({});
   const { firstName, lastName, age, email, password, userName, country } = user;
 
@@ -39,7 +39,7 @@ const Home = () => {
             }
           )
           .then(() => {
-            navigate("/data");
+            navigate("/");
           });
       } catch (error) {
         console.log(error.res);
@@ -71,7 +71,7 @@ const Home = () => {
         }}
       >
         <Forms
-          title="Home"
+          title="Add your Data"
           instructions="Fill the form below"
           bg="rgb(0 176 182)"
           user={user}
@@ -87,7 +87,7 @@ const Home = () => {
         />
       </div>
       <section style={{ width: "250px" }}>
-        <Link to="/data">
+        <Link to="/">
           <Button
             className="mt-3"
             variant="contained"
@@ -103,4 +103,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Add;

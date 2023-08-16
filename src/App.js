@@ -1,5 +1,5 @@
 import "./App.css";
-import Home from "./components/Home";
+import Add from "./components/Add";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import DataBase from "./components/DataBase";
 import Update from "./components/Update";
@@ -15,8 +15,8 @@ function App() {
         <header className="App-header">
           {/* <UpdateContext.Provider value={{ data, setData }}> */}
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/data" element={<DataBase />} />
+            <Route path="/add" element={<Add />} />
+            <Route path="/" element={<DataBase />} />
             <Route path="/update/:id" element={<Update />} />
           </Routes>
           {/* </UpdateContext.Provider> */}
