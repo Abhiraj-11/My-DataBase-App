@@ -90,6 +90,20 @@ const Forms = ({
             <TextField
               fullWidth
               variant="filled"
+              color="warning"
+              type="text"
+              label="Country"
+              InputLabelProps={{ shrink: shrink }}
+              name="country"
+              value={user.country}
+              placeholder="Country"
+              onChange={handleChange}
+            />
+          </div>
+          <div>
+            <TextField
+              fullWidth
+              variant="filled"
               color="primary"
               type="email"
               label="Email"

@@ -62,12 +62,12 @@ const DataBase = () => {
       dataIndex: "id",
       key: "1",
       fixed: "left",
+      sorter: (a, b) => a.id - b.id,
     },
     {
       title: "First Name",
       dataIndex: "firstName",
       key: "2",
-      // fixed: "left",
     },
     {
       title: "Last Name",
@@ -75,35 +75,58 @@ const DataBase = () => {
       key: "3",
     },
     {
+      title: "Country",
+      dataIndex: "country",
+      key: "4",
+      filters: [
+        {
+          text: "India",
+          value: "India",
+        },
+        {
+          text: "Germany",
+          value: "Germany",
+        },
+
+        {
+          text: "United Kingdom",
+          value: "United Kingdom",
+        },
+        {
+          text: "United States",
+          value: "United States",
+        },
+        {
+          text: "Russia",
+          value: "Russia",
+        },
+      ],
+      filterSearch: true,
+      onFilter: (value, record) => value.includes(record.country),
+    },
+    {
       title: "Age",
       dataIndex: "age",
-      key: "4",
+      key: "5",
       sorter: (a, b) => a.age - b.age,
     },
     {
       title: "Email",
       dataIndex: "email",
-      key: "5",
+      key: "6",
     },
     {
       title: "User Name",
       dataIndex: "userName",
-      key: "6",
-    },
-    {
-      title: "Password",
-      dataIndex: "password",
       key: "7",
     },
     {
       title: "Action",
       dataIndex: "action",
       key: "8",
-      fixed: "right",
       render: (id) => {
         return (
           <ButtonGroup>
-            {/* <Link to={`/update/${id}`}> */}
             <Button
               sx={{ zIndex: 0 }}
               startIcon=<UpgradeIcon />
@@ -115,7 +138,6 @@ const DataBase = () => {
             >
               Update
             </Button>
-            {/* </Link> */}
             <Button
               startIcon=<DeleteIcon />
               variant="contained"

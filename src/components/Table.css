@@ -25,7 +25,6 @@ thead {
 th {
     padding: 16px;
     border-bottom: 1px solid #f0f0f0;
-    /* box-shadow: 2px 0 3px -4px; */
 }
 
 td {
@@ -61,9 +60,37 @@ tbody tr td:hover {
     background-color: #fafafa;
 }
 
+.filterIcon {
+    width: 18px;
+    margin-left: 10px;
+}
+
+.filterIcon:hover {
+    background-color: #dbdbdb;
+}
+
+.table-head-sorter:hover {
+    background-color: rgb(240 240 240) !important;
+    cursor: pointer;
+}
+
+.table-head-filter:hover {
+    background-color: rgb(240 240 240) !important;
+    cursor: pointer;
+}
+
+@media screen and (max-width : 1360px) {
+    .table-content {
+        min-height: 40rem;
+        max-width: 64rem;
+        max-height: 40rem;
+        overflow: auto;
+    }
+}
 
 @media screen and (max-width : 1024px) {
     .table-content {
+        min-height: 40rem;
         max-width: 45rem;
         max-height: 40rem;
         overflow: auto;
@@ -72,6 +99,7 @@ tbody tr td:hover {
 
 @media screen and (max-width : 768px) {
     .table-content {
+        min-height: 40rem;
         max-width: 36rem;
         max-height: 40rem;
         overflow: auto;
@@ -80,7 +108,8 @@ tbody tr td:hover {
 
 @media screen and (max-width : 640px) {
     .table-content {
-        width: 18rem;
+        min-height: 34rem;
+        width: 21rem;
         max-height: 34rem;
         overflow: auto;
     }

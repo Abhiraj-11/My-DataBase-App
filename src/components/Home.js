@@ -12,11 +12,19 @@ const url = "https://64bf9dde0d8e251fd1112096.mockapi.io/crud-operation";
 
 const Home = () => {
   const [user, setUser] = useState({});
-  const { firstName, lastName, age, email, password, userName } = user;
+  const { firstName, lastName, age, email, password, userName, country } = user;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (firstName && lastName && age && email && password && userName) {
+    if (
+      firstName &&
+      lastName &&
+      age &&
+      email &&
+      password &&
+      userName &&
+      country
+    ) {
       try {
         await axios
           .post(
@@ -49,6 +57,7 @@ const Home = () => {
       email: "",
       userName: "",
       password: "",
+      country: "",
     });
     console.log("reset");
   };
