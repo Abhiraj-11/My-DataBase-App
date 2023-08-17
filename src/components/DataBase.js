@@ -1,13 +1,13 @@
 import axios from "axios";
 import React, { /*useContext,*/ useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Button, ButtonGroup } from "@mui/material";
+import { Button, ButtonGroup, Typography } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import UpgradeIcon from "@mui/icons-material/Upgrade";
 // import { UpdateContext } from "../App";
-import loading from "../Gif/Loading.gif";
 import Table from "./Table";
+import Loading from "./Loading";
 
 const url = "https://64bf9dde0d8e251fd1112096.mockapi.io/crud-operation";
 
@@ -156,7 +156,20 @@ const DataBase = () => {
 
   return (
     <>
-      <h1 className="mt-4">DATA BASE</h1>
+      <Typography
+        variant="h3"
+        boxShadow="4px 5px 10px 2px gray"
+        sx={{
+          fontWeight: "700",
+          my: 2,
+          px: 2,
+          py: 1,
+          backgroundColor: "#ffb11e",
+          borderRadius: 3,
+        }}
+      >
+        DATA BASE
+      </Typography>
       <Link to="/add">
         <Button variant="contained" color="info" startIcon=<AddIcon />>
           Add
@@ -169,9 +182,7 @@ const DataBase = () => {
           scroll={{ x: true, y: true }}
         />
       </div>
-      <section className="mt-5">
-        {isLoading && <img src={loading} style={{ width: "300px" }} alt="" />}
-      </section>
+      {isLoading && <Loading />}
     </>
   );
 };

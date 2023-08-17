@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import "./Filter.css";
 
-const Filter = ({ dataSource, column, data, setData }) => {
-  const [isChecked, setIsChecked] = useState(false);
+const Filter = ({ dataSource, column, setData, setIsOpen }) => {
   const [selectedOption, setSelectedOption] = useState({});
   const [search, setSearch] = useState("");
 
@@ -12,20 +11,14 @@ const Filter = ({ dataSource, column, data, setData }) => {
     const value = e.target.value;
     if (e.target.checked) {
       setSelectedOption({ ...selectedOption, [name]: value });
-      setIsChecked(e.target.checked);
     } else if (!e.target.checked) {
       const { [name]: removedProperty, ...restOption } = selectedOption;
       setSelectedOption(restOption);
     }
-    if (selectedOption === { "": "" }) {
-      setIsChecked(false);
-    }
   };
 
+  const selectedValue = Object.values(selectedOption);
   const handleFilter = () => {
-    const selectedValue = Object.values(selectedOption);
-    if (selectedValue.length === 0) {
-    }
     setData(
       selectedValue.length > 0
         ? dataSource.filter((record) => {
@@ -33,6 +26,7 @@ const Filter = ({ dataSource, column, data, setData }) => {
           })
         : dataSource
     );
+    setIsOpen(false);
   };
 
   const handleSearch = (e) => {
@@ -40,7 +34,7 @@ const Filter = ({ dataSource, column, data, setData }) => {
   };
 
   const handleReset = () => {
-    setIsChecked(false);
+    setSelectedOption({});
   };
 
   const { filters } = column;
@@ -67,14 +61,15 @@ const Filter = ({ dataSource, column, data, setData }) => {
           })
           .map((filter, index) => {
             return (
-              <label>
-                <li key={filter.text + index}>
+              <label key={filter.text + index}>
+                <li>
                   <input
                     className="checkBox"
                     type="checkbox"
                     name={filter.text}
                     value={filter.value}
                     onChange={handleChange}
+                    checked={!!selectedOption[filter.text]}
                   />
                   {filter.text}
                 </li>
@@ -86,7 +81,7 @@ const Filter = ({ dataSource, column, data, setData }) => {
         <button
           type="button"
           className="btn-reset"
-          disabled={!isChecked}
+          disabled={selectedValue.length === 0 ? true : false}
           onClick={handleReset}
         >
           Reset

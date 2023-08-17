@@ -4,6 +4,7 @@ import axios from "axios";
 import { /*useLocation,*/ useNavigate, useParams } from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import Forms from "./Forms";
+import Loading from "./Loading";
 // import { UpdateContext } from "../App";
 
 const url = "https://64bf9dde0d8e251fd1112096.mockapi.io/crud-operation";
@@ -19,7 +20,7 @@ const Update = () => {
   // email: data.email,
   // password: data.password,
   // });
-
+  const [isLoading, setIsLoading] = useState(true);
   const { id } = useParams();
   const [user, setUser] = useState([]);
 
@@ -34,6 +35,7 @@ const Update = () => {
         },
       });
       setUser(res.data);
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -61,7 +63,7 @@ const Update = () => {
   const handleBack = () => {
     navigate("/");
   };
-  return (
+  return !isLoading ? (
     <div
       className="rounded"
       style={{
@@ -72,7 +74,7 @@ const Update = () => {
         user={user}
         setUser={setUser}
         instructions="Edit your Details below"
-        bg="#ffad00"
+        bg="rgb(0 176 182)"
         title="Update"
         shrink="true"
         buttonIcon1=<UpgradeIcon />
@@ -85,6 +87,8 @@ const Update = () => {
         buttonType2="Back"
       />
     </div>
+  ) : (
+    <Loading />
   );
 };
 

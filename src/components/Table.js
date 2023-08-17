@@ -10,15 +10,11 @@ import Filter from "./Filter";
 const Table = ({ dataSource, columns, scroll }) => {
   const [data, setData] = useState([]);
   const [sortOrder, setSortOrder] = useState("");
-  const [color, setColor] = useState({
-    upArrowColor: "action",
-    downArrowColor: "action",
-    filterColor: "action",
-  });
+  const [sortColumnName, setSortColumnName] = useState("");
   const [isOpen, setIsOpen] = useState(false);
-  let columnStyling = {};
-  const handleFixed = ({ fixed, key }) => {
-    columnStyling = {
+
+  const columnStyling = ({ fixed, key }) => {
+    return {
       backgroundColor: "white",
       position: "sticky",
       [fixed]: fixed === "left" ? (key - 1) * 142 : 0,
@@ -29,12 +25,11 @@ const Table = ({ dataSource, columns, scroll }) => {
     if (sortOrder === "" || sortOrder === "descend") {
       setData(data.sort(sorter));
       setSortOrder("ascend");
-      setColor({ ...color, upArrowColor: "primary", downArrowColor: "action" });
     } else if (sortOrder === "ascend") {
       setData(data.sort((a, b) => b[dataIndex] - a[dataIndex]));
       setSortOrder("descend");
-      setColor({ ...color, downArrowColor: "primary", upArrowColor: "action" });
     }
+    setSortColumnName(dataIndex);
   };
 
   useEffect(() => {
@@ -93,99 +88,102 @@ const Table = ({ dataSource, columns, scroll }) => {
   };
   return (
     <>
-      <div className="table-content" style={scrollStyling(scroll, x, y)}>
+      <div
+        className={classNames("table-content", { "table-height": isOpen })}
+        style={scrollStyling(scroll, x, y)}
+      >
         <table>
           <thead>
             <tr>
               {columns.map((column) => {
                 const { key, title } = column;
                 return (
-                  <>
-                    <th
-                      className={classNames({
-                        "table-head-sorter": column.sorter,
-                        "table-head-filter": column.filters,
-                      })}
-                      onClick={() =>
-                        column.sorter ? handleSort(column) : null
-                      }
-                      key={key}
-                      style={freezeStyling(scroll, column)}
+                  <th
+                    className={classNames({
+                      "table-head-sorter": column.sorter,
+                      "table-head-filter": column.filters,
+                    })}
+                    onClick={() => (column.sorter ? handleSort(column) : null)}
+                    key={key}
+                    style={freezeStyling(scroll, column)}
+                  >
+                    <header
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        width: 140,
+                      }}
                     >
-                      <header
-                        style={{
-                          display: "flex",
-                          justifyContent: "space-between",
-                          alignItems: "center",
-                          width: 140,
-                        }}
-                      >
-                        {title}
+                      {title}
 
-                        {column.filters ? (
-                          <Box
-                            className="filterIcon"
-                            onClick={() =>
-                              column.filters ? handleFilters() : null
-                            }
-                          >
-                            <FilterAltIcon
-                              sx={{ width: 17 }}
-                              color={color.filterColor}
-                              onClick={() =>
-                                setColor(
-                                  color.filterColor === "action"
-                                    ? { ...color, filterColor: "primary" }
-                                    : { ...color, filterColor: "action" }
-                                )
-                              }
-                            />
-                          </Box>
-                        ) : null}
-                        {column.sorter ? (
-                          <Box className="filterIcon">
-                            <ArrowDropUpIcon
-                              color={color.upArrowColor}
-                              sx={{ width: 20 }}
-                            />
-                            <ArrowDropDownIcon
-                              color={color.downArrowColor}
-                              sx={{ width: 20 }}
-                            />
-                          </Box>
-                        ) : null}
-                      </header>
-                      {isOpen && column.filters ? (
-                        <Filter
-                          data={data}
-                          setData={setData}
-                          dataSource={dataSource}
-                          column={column}
-                        />
+                      {column.filters ? (
+                        <Box
+                          className="filterIcon"
+                          onClick={() =>
+                            column.filters ? handleFilters() : null
+                          }
+                        >
+                          <FilterAltIcon
+                            sx={{ width: 17 }}
+                            color={isOpen ? "primary" : "action"}
+                          />
+                        </Box>
                       ) : null}
-                    </th>
-                  </>
+                      {column.sorter ? (
+                        <Box className="filterIcon">
+                          <ArrowDropUpIcon
+                            color={
+                              sortColumnName === column.dataIndex &&
+                              sortOrder === "ascend"
+                                ? "primary"
+                                : "action"
+                            }
+                            sx={{ width: 20 }}
+                          />
+                          <ArrowDropDownIcon
+                            color={
+                              sortColumnName === column.dataIndex &&
+                              sortOrder === "descend"
+                                ? "primary"
+                                : "action"
+                            }
+                            sx={{ width: 20 }}
+                          />
+                        </Box>
+                      ) : null}
+                    </header>
+                    {isOpen && column.filters ? (
+                      <Filter
+                        setIsOpen={setIsOpen}
+                        setData={setData}
+                        dataSource={dataSource}
+                        column={column}
+                      />
+                    ) : null}
+                  </th>
                 );
               })}
             </tr>
           </thead>
           <tbody>
-            {data.map((data) => {
+            {data.map((data, index) => {
               const { id } = data;
               return (
                 <tr key={id}>
                   {columns.map((column) => {
                     const { dataIndex, key } = column;
                     return (
-                      <>
-                        {"fixed" in column ? handleFixed(column) : null}
-                        <td
-                          key={`key-${key}&id-${id}`}
-                          style={column.fixed ? columnStyling : {}}
-                        >
-                          {column.render ? column.render(id) : data[dataIndex]}
-                        </td>
-                      </>
+                      <td
+                        key={`key-${key}&id-${id}`}
+                        style={column.fixed ? columnStyling(column) : {}}
+                      >
+                        {column.render
+                          ? column.render(id)
+                          : //: dataIndex === "id"
+                            //? index + 1
+                            data[dataIndex]}
+                      </td>
                     );
                   })}
                 </tr>

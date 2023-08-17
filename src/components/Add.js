@@ -73,7 +73,7 @@ const Add = () => {
         <Forms
           title="Add your Data"
           instructions="Fill the form below"
-          bg="rgb(0 176 182)"
+          bg="rgb(67 221 14)"
           user={user}
           setUser={setUser}
           buttonIcon1=<SaveIcon />

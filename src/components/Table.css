@@ -14,7 +14,7 @@ table {
         segoe ui emoji,
         segoe ui symbol,
         noto color emoji;
-    font-size: small;
+    font-size: 14px;
 }
 
 thead {
@@ -35,26 +35,6 @@ td {
 tr:hover {
     background-color: #fafafa;
 }
-
-/* thead tr {
-    position: sticky;
-    top: 0;
-    background-color: #fafafa;
-    z-index: 1;
-} */
-
-/* thead tr th:first-child {
-    background-color: #fafafa;
-    position: sticky;
-    left: 0;
-}
-
-tbody tr td:nth-child(1) {
-    background-color: white;
-    position: sticky;
-    left: 0;
-} */
-
 
 tbody tr td:hover {
     background-color: #fafafa;
@@ -79,9 +59,12 @@ tbody tr td:hover {
     cursor: pointer;
 }
 
+.table-height {
+    min-height: 40rem;
+}
+
 @media screen and (max-width : 1360px) {
     .table-content {
-        min-height: 40rem;
         max-width: 64rem;
         max-height: 40rem;
         overflow: auto;
@@ -90,7 +73,6 @@ tbody tr td:hover {
 
 @media screen and (max-width : 1024px) {
     .table-content {
-        min-height: 40rem;
         max-width: 45rem;
         max-height: 40rem;
         overflow: auto;
@@ -99,7 +81,6 @@ tbody tr td:hover {
 
 @media screen and (max-width : 768px) {
     .table-content {
-        min-height: 40rem;
         max-width: 36rem;
         max-height: 40rem;
         overflow: auto;
@@ -108,7 +89,7 @@ tbody tr td:hover {
 
 @media screen and (max-width : 640px) {
     .table-content {
-        min-height: 34rem;
+        /* min-height: 34rem; */
         width: 21rem;
         max-height: 34rem;
         overflow: auto;
