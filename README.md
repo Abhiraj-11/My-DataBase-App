@@ -1,4 +1,4 @@
-# Database App with CRUD Operations - React
+# Database App with CRUD Operations using customized Table Component - React
 
 Welcome to my Database Web App with CRUD (Create, Read, Update, Delete) Operations built using React! This application allows you to interact with a database and perform basic CRUD operations to manage your data effectively.
 
